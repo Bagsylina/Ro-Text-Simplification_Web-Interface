@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  flask-app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: flask-text-app
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - .:/app
+      - model_cache:/root/.cache
+    restart: unless-stopped
+    # Resource limits and reservations
+    deploy:
+      resources:
+        limits:
+          memory: 16G
+          cpus: '8.0'
+        reservations:
+          memory: 12G
+          cpus: '6.0'
+
+volumes:
+  model_cache:
