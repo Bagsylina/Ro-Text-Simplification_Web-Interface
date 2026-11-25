@@ -1,2 +1,4 @@
 /cc.ro.300.bin
 /__pycache__
+cc.ro.300.*
+/cache/huggingface
